@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapse</title>
+    <link rel="icon" href="https://synz.lol/synz.png" type="image/png">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: #111;
+            width: 100%;
+        }
+        .logo {
+            max-width: 150px;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-buttons img {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .nav-buttons img:hover {
+            transform: scale(1.1);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 20px 0;
+        }
+        .content {
+            padding: 20px;
+            flex: 1;
+        }
+        .social-icons {
+            margin-top: 20px;
+        }
+        .social-icons a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 2em;
+            transition: transform 0.3s;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+        footer {
+            background-color: #111;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #ddd;
+        }
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .background-animation div {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: animate 20s linear infinite;
+        }
+        @keyframes animate {
+            0% {
+                transform: scale(0) translateY(0);
+            }
+            100% {
+                transform: scale(1) translateY(1000px);
+            }
+        }
+        .background-animation div:nth-child(1) {
+            width: 50px;
+            height: 50px;
+            left: 10%;
+            animation-duration: 20s;
+        }
+        .background-animation div:nth-child(2) {
+            width: 100px;
+            height: 100px;
+            left: 30%;
+            animation-duration: 15s;
+        }
+        .background-animation div:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            left: 50%;
+            animation-duration: 10s;
+        }
+        .background-animation div:nth-child(4) {
+            width: 200px;
+            height: 200px;
+            left: 70%;
+            animation-duration: 25s;
+        }
+        .background-animation div:nth-child(5) {
+            width: 250px;
+            height: 250px;
+            left: 90%;
+            animation-duration: 30s;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://x.synapse.to/_next/static/media/logo.c98810b8.svg" alt="SynapseLogo" class="logo">
+        <div class="nav-buttons">
+            <a href="https://synz.lol">
+                <img src="https://synz.lol/synz.png" alt="Home">
+            </a>
+            <a href="https://store.serenitytube.net/zh-cn/product/synapse-z-executor-windows" target="_blank">
+                <img src="https://synz.lol/synz.png" alt="Discord">
+            </a>
+            <a href="https://diacord.com">
+                <img src="https://synz.lol/synz.png" alt="Download">
+            </a>
+        </div>
+    </header>
+    <div class="content" id="home">
+        <h1>Synapse</h1>
+        <p>Project Height</p>
+        <div class="social-icons">
+            <a href="https://www.youtube.com/watch?v=UrGjqauz1Cg" target="_blank">&#9658;</a>
+        </div>
+    </div>
+    <footer>
+        <a href="https://synz.lol/docs">Guide</a>
+        <a href="https://synapsesoftworks.llc">About</a>
+    </footer>
+    <div class="background-animation">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>
