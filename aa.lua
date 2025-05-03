@@ -12,7 +12,7 @@ local TextLabel = Instance.new("TextLabel")
 --Properties:
 
 TpGui.Name = "TpGui"
-TpGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+TpGui.Parent = game.CoreGui
 TpGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Main.Name = "Main"
