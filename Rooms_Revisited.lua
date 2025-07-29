@@ -1,18 +1,4 @@
--- 引入必要的服务
-local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-
--- 获取本地玩家和PlayerGui
-local localPlayer = Players.LocalPlayer
-local playerGui = localPlayer:WaitForChild("PlayerGui")
-
--- 创建ScreenGui
 local Keybind = Instance.new("ScreenGui")
-Keybind.Name = "Keybind"
-Keybind.Parent = playerGui
-Keybind.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
--- 创建主容器
 local Main = Instance.new("Frame")
 local Frame = Instance.new("Frame")
 local Label = Instance.new("TextLabel")
@@ -34,173 +20,252 @@ local Oply = Instance.new("TextLabel")
 local Mzlo = Instance.new("TextLabel")
 local Nzpd = Instance.new("TextLabel")
 
--- 设备自适应UI调整函数
-local function updateUIForDevice()
-    local screenSize = playerGui.AbsoluteSize
-    local isSmallScreen = screenSize.X < 800 or screenSize.Y < 600
-    local scaleFactor = math.min(screenSize.X / 1920, screenSize.Y / 1080)
-    local buttonHeight = isSmallScreen and 24 or 30
-    local fontSize = isSmallScreen and 12 or 14
-    local padding = isSmallScreen and 8 or 10
-    local widthPercent = isSmallScreen and 0.4 or 0.25
-
-    -- 更新Main容器
-    Main.Name = "Main"
-    Main.Parent = Keybind
-    Main.AnchorPoint = Vector2.new(0.5, 0)
-    Main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Main.BackgroundTransparency = 1.000
-    Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Main.BorderSizePixel = 0
-    Main.Position = UDim2.new(0.5, 0, 0.1, 0)
-    Main.Size = UDim2.new(widthPercent, 0, 0, 0)
-
-    -- 更新Frame
-    Frame.Parent = Main
-    Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-    Frame.BackgroundTransparency = 0.8
-    Frame.BorderColor3 = Color3.fromRGB(255, 255, 255)
-    Frame.BorderSizePixel = 1
-    Frame.Position = UDim2.new(0, 0, 0, 0)
-    Frame.Size = UDim2.new(1, 0, 0, 0)
-    Frame.AutomaticSize = Enum.AutomaticSize.Y
-
-    -- 更新标题Label
-    Label.Name = "Label"
-    Label.Parent = Frame
-    Label.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
-    Label.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    Label.BorderSizePixel = 0
-    Label.Size = UDim2.new(1, 0, 0, buttonHeight)
-    Label.Font = Enum.Font.SourceSans
-    Label.Text = "Syllable(Rooms: Revisited)"
-    Label.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Label.TextSize = fontSize
-    Label.TextXAlignment = Enum.TextXAlignment.Center
-
-    -- 更新关闭按钮
-    TextButton.Parent = Label
-    TextButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
-    TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-    TextButton.BorderSizePixel = 0
-    TextButton.Position = UDim2.new(1, -buttonHeight, 0, 0)
-    TextButton.Size = UDim2.new(0, buttonHeight, 0, buttonHeight)
-    TextButton.Font = Enum.Font.SourceSansBold
-    TextButton.Text = "X"
-    TextButton.TextColor3 = Color3.fromRGB(165, 0, 0)
-    TextButton.TextSize = fontSize
-
-    -- 更新UIListLayout
-    UIListLayout.Parent = Frame
-    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-    UIListLayout.Padding = UDim.new(0, padding)
-
-    -- 更新按钮通用函数
-    local function updateButton(button, text, layoutOrder)
-        button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-        button.BackgroundTransparency = 0.5
-        button.BorderColor3 = Color3.fromRGB(255, 255, 255)
-        button.BorderSizePixel = 1
-        button.Size = UDim2.new(1, 0, 0, buttonHeight)
-        button.Font = Enum.Font.SourceSans
-        button.Text = text
-        button.TextColor3 = Color3.fromRGB(255, 0, 4)
-        button.TextSize = fontSize
-        button.LayoutOrder = layoutOrder
-        button.Parent = Frame
-    end
-
-    -- 更新各个按钮
-    updateButton(Adoor, "Door esp       [G]", 1)
-    updateButton(Blocker, "Locker esp  [R]", 2)
-    updateButton(Ccoin, "Coin(Pile) esp   [K]", 3)
-    updateButton(Dfb, "Fullbright   [T]", 4)
-    updateButton(Ews, "Loopspeed(35)   [H]", 5)
-    updateButton(FWA, "Warn A60   [M]", 6)
-    updateButton(Gwaa, "Warn A200   [L]", 7)
-    updateButton(Htsp, "InstantPP   [P]", 8)
-    updateButton(ID70, "Delete A70   [J]", 9)
-    updateButton(JD25, "Delete A25   [U]", 10)
-    updateButton(KD90, "Delete A90   [Z]", 11)
-    -- 其他按钮...
-end
-
--- 初始化UI
-updateUIForDevice()
-
--- 监听屏幕大小变化
-playerGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateUIForDevice)
--- 初始化UI
-updateUIForDevice()
-
--- 监听屏幕大小变化
-playerGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateUIForDevice)
-
--- 确保Keybind的父级设置正确
-Keybind.Parent = playerGui
+Keybind.Name = "Keybind"
+Keybind.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 Keybind.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
--- 确保所有按钮使用updateButton函数设置
-updateButton(Adoor, "Door esp       [G]", 1)
-updateButton(Blocker, "Locker esp  [R]", 2)
-updateButton(Ccoin, "Coin(Pile) esp   [K]", 3)
-updateButton(Dfb, "Fullbright   [T]", 4)
-updateButton(Ews, "Loopspeed(35)   [H]", 5)
-updateButton(FWA, "Warn A60   [M]", 6)
-updateButton(Gwaa, "Warn A200   [L]", 7)
-updateButton(Htsp, "InstantPP   [P]", 8)
-updateButton(ID70, "Delete A70   [J]", 9)
-updateButton(JD25, "Delete A25   [U]", 10)
-updateButton(KD90, "Delete A90", 11)
-updateButton(LD90B, "Delete A90b", 12)
+Main.Name = "Main"
+Main.Parent = Keybind
+Main.AnchorPoint = Vector2.new(0.5, 0)
+Main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Main.BackgroundTransparency = 1.000
+Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.5, 0, 0.446921438, 0)
+Main.Size = UDim2.new(0, 100, 0, 100)
 
--- 特殊样式按钮
-updateButton(Oply, "Hello!", 13)
+Frame.Parent = Main
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(-5.80000019, 0, -0.25, 0)
+Frame.Size = UDim2.new(0, 199, 0, 339)
+Frame.Active = true
+Frame.Draggable = true
+
+Label.Name = "Label"
+Label.Parent = Frame
+Label.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+Label.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Label.BorderSizePixel = 0
+Label.Size = UDim2.new(0, 199, 0, 21)
+Label.Font = Enum.Font.SourceSans
+Label.Text = "Syllable(Rooms: Revisited)"
+Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+Label.TextSize = 14.000
+
+TextButton.Parent = Label
+TextButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.BorderSizePixel = 0
+TextButton.Position = UDim2.new(0.901356757, 0, -0.0179646816, 0)
+TextButton.Size = UDim2.new(0, 19, 0, 21)
+TextButton.Font = Enum.Font.SourceSansBold
+TextButton.Text = "X"
+TextButton.TextColor3 = Color3.fromRGB(165, 0, 0)
+TextButton.TextSize = 14.000
+TextButton.MouseButton1Click:Connect(function()
+    Keybind.Enabled = false
+end)
+
+UIListLayout.Parent = Frame
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+Adoor.Name = "Adoor"
+Adoor.Parent = Frame
+Adoor.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Adoor.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Adoor.BorderSizePixel = 0
+Adoor.Position = UDim2.new(0, 0, 0.151079133, 0)
+Adoor.Size = UDim2.new(0, 199, 0, 21)
+Adoor.Font = Enum.Font.SourceSans
+Adoor.Text = "Door esp       [G]"
+Adoor.TextColor3 = Color3.fromRGB(255, 0, 4)
+Adoor.TextSize = 14.000
+
+Blocker.Name = "Blocker"
+Blocker.Parent = Frame
+Blocker.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Blocker.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Blocker.BorderSizePixel = 0
+Blocker.Position = UDim2.new(0, 0, 0.302158266, 0)
+Blocker.Size = UDim2.new(0, 199, 0, 21)
+Blocker.Font = Enum.Font.SourceSans
+Blocker.Text = "Locker esp  [R]"
+Blocker.TextColor3 = Color3.fromRGB(255, 0, 4)
+Blocker.TextSize = 14.000
+
+Ccoin.Name = "Ccoin"
+Ccoin.Parent = Frame
+Ccoin.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Ccoin.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Ccoin.BorderSizePixel = 0
+Ccoin.Position = UDim2.new(0, 0, 0.453237414, 0)
+Ccoin.Size = UDim2.new(0, 199, 0, 21)
+Ccoin.Font = Enum.Font.SourceSans
+Ccoin.Text = "Coin(Pile) esp   [K]"
+Ccoin.TextColor3 = Color3.fromRGB(255, 0, 4)
+Ccoin.TextSize = 14.000
+
+Dfb.Name = "Dfb"
+Dfb.Parent = Frame
+Dfb.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Dfb.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Dfb.BorderSizePixel = 0
+Dfb.Position = UDim2.new(0, 0, 0.453237414, 0)
+Dfb.Size = UDim2.new(0, 199, 0, 21)
+Dfb.Font = Enum.Font.SourceSans
+Dfb.Text = "Fullbright   [T]"
+Dfb.TextColor3 = Color3.fromRGB(255, 0, 4)
+Dfb.TextSize = 14.000
+
+Ews.Name = "Ews"
+Ews.Parent = Frame
+Ews.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Ews.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Ews.BorderSizePixel = 0
+Ews.Position = UDim2.new(0, 0, 0.453237414, 0)
+Ews.Size = UDim2.new(0, 199, 0, 21)
+Ews.Font = Enum.Font.SourceSans
+Ews.Text = "Loopspeed(35)   [H]"
+Ews.TextColor3 = Color3.fromRGB(255, 0, 4)
+Ews.TextSize = 14.000
+
+FWA.Name = "FWA"
+FWA.Parent = Frame
+FWA.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+FWA.BorderColor3 = Color3.fromRGB(0, 0, 0)
+FWA.BorderSizePixel = 0
+FWA.Position = UDim2.new(0, 0, 0.453237414, 0)
+FWA.Size = UDim2.new(0, 199, 0, 21)
+FWA.Font = Enum.Font.SourceSans
+FWA.Text = "Warn A60   [M]"
+FWA.TextColor3 = Color3.fromRGB(255, 0, 4)
+FWA.TextSize = 14.000
+
+Gwaa.Name = "Gwaa"
+Gwaa.Parent = Frame
+Gwaa.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Gwaa.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Gwaa.BorderSizePixel = 0
+Gwaa.Position = UDim2.new(0, 0, 0.453237414, 0)
+Gwaa.Size = UDim2.new(0, 199, 0, 21)
+Gwaa.Font = Enum.Font.SourceSans
+Gwaa.Text = "Warn A200   [L]"
+Gwaa.TextColor3 = Color3.fromRGB(255, 0, 4)
+Gwaa.TextSize = 14.000
+
+Htsp.Name = "Htsp"
+Htsp.Parent = Frame
+Htsp.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Htsp.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Htsp.BorderSizePixel = 0
+Htsp.Position = UDim2.new(0, 0, 0.453237414, 0)
+Htsp.Size = UDim2.new(0, 199, 0, 21)
+Htsp.Font = Enum.Font.SourceSans
+Htsp.Text = "InstantPP   [P]"
+Htsp.TextColor3 = Color3.fromRGB(255, 0, 4)
+Htsp.TextSize = 14.000
+
+ID70.Name = "ID70"
+ID70.Parent = Frame
+ID70.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ID70.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ID70.BorderSizePixel = 0
+ID70.Position = UDim2.new(0, 0, 0.453237414, 0)
+ID70.Size = UDim2.new(0, 199, 0, 21)
+ID70.Font = Enum.Font.SourceSans
+ID70.Text = "Delete A70   [J]"
+ID70.TextColor3 = Color3.fromRGB(255, 0, 4)
+ID70.TextSize = 14.000
+
+JD25.Name = "JD25"
+JD25.Parent = Frame
+JD25.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+JD25.BorderColor3 = Color3.fromRGB(0, 0, 0)
+JD25.BorderSizePixel = 0
+JD25.Position = UDim2.new(0, 0, 0.453237414, 0)
+JD25.Size = UDim2.new(0, 199, 0, 21)
+JD25.Font = Enum.Font.SourceSans
+JD25.Text = "Delete A25   [U]"
+JD25.TextColor3 = Color3.fromRGB(255, 0, 4)
+JD25.TextSize = 14.000
+
+KD90.Name = "KD90"
+KD90.Parent = Frame
+KD90.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+KD90.BorderColor3 = Color3.fromRGB(0, 0, 0)
+KD90.BorderSizePixel = 0
+KD90.Position = UDim2.new(0, 0, 0.453237414, 0)
+KD90.Size = UDim2.new(0, 199, 0, 21)
+KD90.Font = Enum.Font.SourceSans
+KD90.Text = "Delete A90"
+KD90.TextColor3 = Color3.fromRGB(255, 0, 4)
+KD90.TextSize = 14.000
+
+LD90B.Name = "LD90B"
+LD90B.Parent = Frame
+LD90B.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+LD90B.BorderColor3 = Color3.fromRGB(0, 0, 0)
+LD90B.BorderSizePixel = 0
+LD90B.Position = UDim2.new(0, 0, 0.453237414, 0)
+LD90B.Size = UDim2.new(0, 199, 0, 21)
+LD90B.Font = Enum.Font.SourceSans
+LD90B.Text = "Delete A90b"
+LD90B.TextColor3 = Color3.fromRGB(255, 0, 4)
+LD90B.TextSize = 14.000
+
+Oply.Name = "Oply"
+Oply.Parent = Frame
+Oply.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Oply.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Oply.BorderSizePixel = 0
+Oply.Position = UDim2.new(0, 0, 0.453237414, 0)
+Oply.Size = UDim2.new(0, 199, 0, 21)
+Oply.Font = Enum.Font.SourceSans
+Oply.Text = "Hello!"
 Oply.TextColor3 = Color3.fromRGB(0, 170, 0)
+Oply.TextSize = 14.000
+Oply.Text = "Hello! " .. game.Players.LocalPlayer.Name
 
-updateButton(Mzlo, "Close This UI [Q]", 14)
+Mzlo.Name = "Mzlo"
+Mzlo.Parent = Frame
 Mzlo.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+Mzlo.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Mzlo.BorderSizePixel = 0
+Mzlo.Size = UDim2.new(0, 199, 0, 21)
+Mzlo.Font = Enum.Font.SourceSans
+Mzlo.Text = "Close This UI [Q]"
 Mzlo.TextColor3 = Color3.fromRGB(255, 255, 255)
+Mzlo.TextSize = 14.000
 
-updateButton(Nzpd, "More update soon...", 15)
+Nzpd.Name = "Nzpd"
+Nzpd.Parent = Frame
 Nzpd.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+Nzpd.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Nzpd.BorderSizePixel = 0
+Nzpd.Size = UDim2.new(0, 199, 0, 21)
+Nzpd.Font = Enum.Font.SourceSans
+Nzpd.Text = "More update soon..."
 Nzpd.TextColor3 = Color3.fromRGB(255, 255, 255)
+Nzpd.TextSize = 14.000
 
--- Scripts:
 
--- 关闭按钮功能
-local function setupCloseButton()
-    TextButton.MouseButton1Click:Connect(function()
-        Keybind.Enabled = false
-    end)
-end
-setupCloseButton()
 
--- 个性化问候语
-local function setupGreeting()
-    Oply.Text = "Hello! " .. localPlayer.Name
-    Oply.TextColor3 = Color3.fromRGB(0, 170, 0)
-end
-setupGreeting()
+	local UserInputService = game:GetService("UserInputService")
+	local Players = game:GetService("Players")
+	
+	local player = Players.LocalPlayer
+	local playerGui = player:WaitForChild("PlayerGui")
+	local keybindGui = Keybind
+	
+	UserInputService.InputBegan:Connect(function(input, gameProcessed)
+	    if gameProcessed then return end
+	    if input.KeyCode == Enum.KeyCode.Q then
+	        keybindGui.Enabled = not keybindGui.Enabled
+	    end
+	end)
 
--- 帧可拖动功能
-local function setupDraggableFrame()
-    Frame.Active = true
-    Frame.Draggable = true
-end
-setupDraggableFrame()
-
--- Q键切换UI显示
-local function setupToggleKeybind()
-    local UserInputService = game:GetService("UserInputService")
-    UserInputService.InputBegan:Connect(function(input, gameProcessed)
-        if gameProcessed then return end
-        if input.KeyCode == Enum.KeyCode.Q then
-            Keybind.Enabled = not Keybind.Enabled
-        end
-    end)
-end
-setupToggleKeybind()
 
 
 
@@ -330,11 +395,6 @@ end)
 
 -- 初始执行添加文字函数
 addTextDisplay()
-
-
-
-
-
 
 local Workspace = game:GetService("Workspace")
 local UserInputService = game:GetService("UserInputService")
@@ -971,9 +1031,6 @@ local function cleanUp()
 	end
 end
 
--- 游戏关闭时清理
-game:BindToClose(cleanUp)
-
 speaker.AncestryChanged:Connect(function()
 	if not speaker:IsDescendantOf(game) then
 		cleanUp()
@@ -981,363 +1038,88 @@ speaker.AncestryChanged:Connect(function()
 end)
 
 
+warn("A60 WARN AND A200 WARN SOON")
+game:GetService("Players").LocalPlayer.PlayerGui.A902:Destroy()
+game:GetService("Players").LocalPlayer.PlayerGui.A90:Destroy()
 
 
 
--- 引入必要的服务
+
+
 local Workspace = game:GetService("Workspace")
-local Players = game:GetService("Players")
-local UserInputService = game:GetService("UserInputService")
-local TweenService = game:GetService("TweenService")
-local SoundService = game:GetService("SoundService")
+local targetName = "APoopy"
+local entitiesFolder = Workspace.Entities
 
--- 创建提示音
-local function createNotificationSound()
-    local sound = Instance.new("Sound")
-    sound.Name = "NotificationSound"
-    sound.SoundId = "rbxassetid://1467026019"
-    sound.Volume = 0.5
-    sound.Parent = SoundService
-    return sound
-end
-
-local notificationSound = createNotificationSound()
-
--- 等待Entities加载
-local Entities = Workspace:WaitForChild("Entities", 10)
-
-if not Entities then
-    warn("无法找到Entities文件夹，脚本将无法正常工作")
-    return
-end
-
--- 功能开关状态 (默认为打开)
-local isEnabled = true
-
--- 切换功能开关
-local function toggleEnabled()
-    isEnabled = not isEnabled
-    local statusMessage = isEnabled and "已启用" or "已禁用"
-    notifyPlayers("A60检测" .. statusMessage)
-end
-
--- 监听L键按下事件
-UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
-    if not gameProcessedEvent and input.KeyCode == Enum.KeyCode.M then
-        toggleEnabled()
+-- 检测目标出现
+local function onChildAdded(child)
+    if child.Name == targetName then
+        print("你好我是")
     end
-end)
+end
 
--- 提示玩家函数
-local function notifyPlayers(message)
-    -- 播放提示音
-    notificationSound:Play()
+-- 检测目标消失
+local function onChildRemoved(child)
+    if child.Name == targetName then
+        print("再见我是")
+    end
+end
 
-    for _, player in ipairs(Players:GetPlayers()) do
-        if player:FindFirstChild("PlayerGui") then
-            local playerGui = player.PlayerGui
-            local screenSize = playerGui.AbsoluteSize
-
-            -- 创建通知容器
-            local notification = Instance.new("ScreenGui")
-            notification.Name = "A60Notification"
-            notification.Parent = playerGui
-            notification.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-            -- 创建背景框架
-            local background = Instance.new("Frame")
-            background.Size = UDim2.new(0.6, 0, 0.12, 0)
-            -- 根据屏幕大小调整位置
-            background.Position = UDim2.new(0.2, 0, screenSize.Y > 720 and 0.8 or 0.7)
-            background.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-            background.BackgroundTransparency = 0.2
-            background.BorderSizePixel = 2
-            background.BorderColor3 = Color3.fromRGB(255, 255, 255)
-            background.CornerRadius = UDim2.new(0, 10)
-            background.Parent = notification
-
-            -- 创建消息文本
-            local messageLabel = Instance.new("TextLabel")
-            -- 动态调整字体大小
-            local textSize = screenSize.Y > 720 and 24 or 18
-            messageLabel.Size = UDim2.new(1, 0, 0.7, 0)
-            messageLabel.Position = UDim2.new(0, 0, 0, 0)
-            messageLabel.BackgroundTransparency = 1
-            messageLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-            messageLabel.Font = Enum.Font.SourceSansBold
-            messageLabel.TextSize = textSize
-            messageLabel.Text = message
-            messageLabel.Parent = background
-
-            -- 创建倒计时条
-            local timerBar = Instance.new("Frame")
-            timerBar.Size = UDim2.new(1, 0, 0.1, 0)
-            timerBar.Position = UDim2.new(0, 0, 0.9, 0)
-            timerBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            timerBar.Parent = background
-
-            -- 创建倒计时文本
-            local timerLabel = Instance.new("TextLabel")
-            timerLabel.Size = UDim2.new(1, 0, 0.2, 0)
-            timerLabel.Position = UDim2.new(0, 0, 0.7, 0)
-            timerLabel.BackgroundTransparency = 1
-            timerLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-            timerLabel.Font = Enum.Font.SourceSansBold
-            timerLabel.TextSize = textSize - 4
-            timerLabel.Text = "3秒后消失"
-            timerLabel.Parent = background
-
-            -- 淡入动画
-            local fadeInTween = TweenService:Create(
-                background,
-                TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-                {BackgroundTransparency = 0.2}
-            )
-            fadeInTween:Play()
-
-            -- 倒计时和淡出动画
-            local duration = 3
-            local startTime = tick()
-
-            spawn(function()
-                while tick() - startTime < duration do
-                    local elapsed = tick() - startTime
-                    local remaining = duration - elapsed
-                    local progress = elapsed / duration
-
-                    -- 更新倒计时条
-                    timerBar.Size = UDim2.new(1 - progress, 0, 0.1, 0)
-
-                    -- 更新倒计时文本
-                    timerLabel.Text = string.format("%.1f秒后消失", remaining)
-
-                    wait(0.1)
-                end
-
-                -- 淡出动画
-                local fadeOutTween = TweenService:Create(
-                    background,
-                    TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
-                    {BackgroundTransparency = 1}
-                )
-                fadeOutTween:Play()
-                fadeOutTween.Completed:Wait()
-
-                -- 移除通知
-                notification:Destroy()
-            end)
+-- 初始检查并设置事件监听
+local function initializeDetection()
+        -- 初始检查是否已存在
+        if entitiesFolder:FindFirstChild(targetName) then
+            print("你好我是")
         end
-    end
+
+        -- 连接事件监听器
+        entitiesFolder.ChildAdded:Connect(onChildAdded)
+        entitiesFolder.ChildRemoved:Connect(onChildRemoved)
 end
 
--- 检查Ao是否已经存在
-local function checkForATwoo()
-    if not isEnabled then return end
-    local atwoo = Entities:FindFirstChild("APoopy")
-    if atwoo then
-        notifyPlayers("警告: A60已出现!")
-    end
-end
-
--- 监听ChildAdded事件
-Entities.ChildAdded:Connect(function(child)
-    if isEnabled and child.Name == "APoopy" then
-        notifyPlayers("警告: A60已出现!")
-    end
-end)
-
--- 监听ChildRemoved事件
-Entities.ChildRemoved:Connect(function(child)
-    if isEnabled and child.Name == "APoopy" then
-        notifyPlayers("提示: A60已消失!")
-    end
-end)
-
--- 初始检查
-checkForATwoo()
-
--- 显示初始状态信息
-print("A60检测已加载")
-print("功能状态: 已启用")
-print("按M键切换开关状态")
+initializeDetection()
 
 
 
 
 
--- 引入必要的服务
+
 local Workspace = game:GetService("Workspace")
-local Players = game:GetService("Players")
-local UserInputService = game:GetService("UserInputService")
-local TweenService = game:GetService("TweenService")
-local SoundService = game:GetService("SoundService")
+local targetName = "ATwoo"
+local entitiesFolder = Workspace.Entities
 
--- 创建提示音
-local function createNotificationSound()
-    local sound = Instance.new("Sound")
-    sound.Name = "NotificationSound"
-    sound.SoundId = "rbxassetid://1467026019"
-    sound.Volume = 0.5
-    sound.Parent = SoundService
-    return sound
-end
-
-local notificationSound = createNotificationSound()
-
--- 等待Entities加载
-local Entities = Workspace:WaitForChild("Entities", 10)
-
-if not Entities then
-    warn("无法找到Entities文件夹，脚本将无法正常工作")
-    return
-end
-
--- 功能开关状态 (默认为打开)
-local isEnabled = true
-
--- 切换功能开关
-local function toggleEnabled()
-    isEnabled = not isEnabled
-    local statusMessage = isEnabled and "已启用" or "已禁用"
-    notifyPlayers("A200检测" .. statusMessage)
-end
-
--- 监听L键按下事件
-UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
-    if not gameProcessedEvent and input.KeyCode == Enum.KeyCode.L then
-        toggleEnabled()
+-- 检测目标出现
+local function onChildAdded(child)
+    if child.Name == targetName then
+        print("你好我是")
     end
-end)
+end
 
--- 提示玩家函数
-local function notifyPlayers(message)
-    -- 播放提示音
-    notificationSound:Play()
+-- 检测目标消失
+local function onChildRemoved(child)
+    if child.Name == targetName then
+        print("再见我是")
+    end
+end
 
-    for _, player in ipairs(Players:GetPlayers()) do
-        if player:FindFirstChild("PlayerGui") then
-            local playerGui = player.PlayerGui
-            local screenSize = playerGui.AbsoluteSize
-
-            -- 创建通知容器
-            local notification = Instance.new("ScreenGui")
-            notification.Name = "A200Notification"
-            notification.Parent = playerGui
-            notification.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-            -- 创建背景框架
-            local background = Instance.new("Frame")
-            background.Size = UDim2.new(0.6, 0, 0.12, 0)
-            -- 根据屏幕大小调整位置
-            background.Position = UDim2.new(0.2, 0, screenSize.Y > 720 and 0.8 or 0.7)
-            background.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-            background.BackgroundTransparency = 0.2
-            background.BorderSizePixel = 2
-            background.BorderColor3 = Color3.fromRGB(255, 255, 255)
-            background.CornerRadius = UDim2.new(0, 10)
-            background.Parent = notification
-
-            -- 创建消息文本
-            local messageLabel = Instance.new("TextLabel")
-            -- 动态调整字体大小
-            local textSize = screenSize.Y > 720 and 24 or 18
-            messageLabel.Size = UDim2.new(1, 0, 0.7, 0)
-            messageLabel.Position = UDim2.new(0, 0, 0, 0)
-            messageLabel.BackgroundTransparency = 1
-            messageLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-            messageLabel.Font = Enum.Font.SourceSansBold
-            messageLabel.TextSize = textSize
-            messageLabel.Text = message
-            messageLabel.Parent = background
-
-            -- 创建倒计时条
-            local timerBar = Instance.new("Frame")
-            timerBar.Size = UDim2.new(1, 0, 0.1, 0)
-            timerBar.Position = UDim2.new(0, 0, 0.9, 0)
-            timerBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            timerBar.Parent = background
-
-            -- 创建倒计时文本
-            local timerLabel = Instance.new("TextLabel")
-            timerLabel.Size = UDim2.new(1, 0, 0.2, 0)
-            timerLabel.Position = UDim2.new(0, 0, 0.7, 0)
-            timerLabel.BackgroundTransparency = 1
-            timerLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-            timerLabel.Font = Enum.Font.SourceSansBold
-            timerLabel.TextSize = textSize - 4
-            timerLabel.Text = "3秒后消失"
-            timerLabel.Parent = background
-
-            -- 淡入动画
-            local fadeInTween = TweenService:Create(
-                background,
-                TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-                {BackgroundTransparency = 0.2}
-            )
-            fadeInTween:Play()
-
-            -- 倒计时和淡出动画
-            local duration = 3
-            local startTime = tick()
-
-            spawn(function()
-                while tick() - startTime < duration do
-                    local elapsed = tick() - startTime
-                    local remaining = duration - elapsed
-                    local progress = elapsed / duration
-
-                    -- 更新倒计时条
-                    timerBar.Size = UDim2.new(1 - progress, 0, 0.1, 0)
-
-                    -- 更新倒计时文本
-                    timerLabel.Text = string.format("%.1f秒后消失", remaining)
-
-                    wait(0.1)
-                end
-
-                -- 淡出动画
-                local fadeOutTween = TweenService:Create(
-                    background,
-                    TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
-                    {BackgroundTransparency = 1}
-                )
-                fadeOutTween:Play()
-                fadeOutTween.Completed:Wait()
-
-                -- 移除通知
-                notification:Destroy()
-            end)
+-- 初始检查并设置事件监听
+local function initializeDetection()
+        -- 初始检查是否已存在
+        if entitiesFolder:FindFirstChild(targetName) then
+            print("你好我是")
         end
-    end
+
+        -- 连接事件监听器
+        entitiesFolder.ChildAdded:Connect(onChildAdded)
+        entitiesFolder.ChildRemoved:Connect(onChildRemoved)
 end
 
--- 检查ATwoo是否已经存在
-local function checkForATwoo()
-    if not isEnabled then return end
-    local atwoo = Entities:FindFirstChild("ATwoo")
-    if atwoo then
-        notifyPlayers("警告: A200已出现!")
-    end
-end
+initializeDetection()
 
--- 监听ChildAdded事件
-Entities.ChildAdded:Connect(function(child)
-    if isEnabled and child.Name == "ATwoo" then
-        notifyPlayers("警告: A200已出现!")
-    end
-end)
 
--- 监听ChildRemoved事件
-Entities.ChildRemoved:Connect(function(child)
-    if isEnabled and child.Name == "ATwoo" then
-        notifyPlayers("提示: A200已消失!")
-    end
-end)
 
--- 初始检查
-checkForATwoo()
 
--- 显示初始状态信息
-print("A200检测已加载")
-print("功能状态: 已启用")
-print("按L键切换开关状态")
+
+
+
+
+print("Loaded")
