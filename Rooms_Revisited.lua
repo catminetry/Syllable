@@ -23,7 +23,7 @@ local targetPosition = Vector3.new(-235.09442138671875, 228.0357666015625, 23.75
         local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
         
 
-
+game:GetService("Lighting").Atmosphere.Enabled = false
 
 
 local Keybind = Instance.new("ScreenGui")
@@ -848,8 +848,6 @@ removeModel("LockerMimicNew")
 local Lighting = game:GetService("Lighting")
 local RunService = game:GetService("RunService")
 local brightLoop
-game:GetService("Lighting").Atmosphere:Destroy()
-game:GetService("Lighting").Brightness = 10
 function FullBrught()
 	local isEnabled = true
 	local originalSettings = {}
@@ -1108,22 +1106,11 @@ local function onChildAdded(child)
         C:Play()
 
 
-local TextChatService = game:GetService("TextChatService")
-
-local function sendMessageToChannel(channelName, message)
-    local textChannelContainer = TextChatService:FindFirstChild("TextChannels")
-    local channel = textChannelContainer:FindFirstChild(channelName)
-    channel:SendAsync(message)
-end
-
-sendMessageToChannel("A60", "A60 is here!")
-
-
-            local message = Instance.new("Message")
-            message.Parent = workspace
-            message.Text = "A60 Hide."
-            wait(3)
-            message:Destroy()
+game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "a60",
+        Text = "hide.！！！",
+        Duration = 3
+    })
 
 
 
@@ -1140,26 +1127,11 @@ local function onChildRemoved(child)
 
 B:Play()
 
-
-local TextChatService = game:GetService("TextChatService")
-
-local function sendMessageToChannel(channelName, message)
-    local textChannelContainer = TextChatService:FindFirstChild("TextChannels")
-    local channel = textChannelContainer:FindFirstChild(channelName)
-    channel:SendAsync(message)
-end
-
-sendMessageToChannel("A60", "A60 is removed!")
-
-
-
-
-
-            local message = Instance.new("Message")
-            message.Parent = workspace
-            message.Text = "A60 Removed."
-            wait(3)
-            message:Destroy()
+game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "a60",
+        Text = "hide.！！！",
+        Duration = 3
+    })
     end
 end
 
@@ -1169,40 +1141,19 @@ local function initializeDetection()
             C:Play()
 
 
-
-
-
-local TextChatService = game:GetService("TextChatService")
-
-local function sendMessageToChannel(channelName, message)
-    local textChannelContainer = TextChatService:FindFirstChild("TextChannels")
-    local channel = textChannelContainer:FindFirstChild(channelName)
-    channel:SendAsync(message)
-end
-
-sendMessageToChannel("A60", "A60 is here!")
-
-
-
-
-
-
-
-
-
-            local message = Instance.new("Message")
-            message.Parent = workspace
-            message.Text = "A60 Hide."
-            wait(3)
-            message:Destroy()
+game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "a60",
+        Text = "hide.！！！",
+        Duration = 3
+    })
         end
 
         entitiesFolder.ChildAdded:Connect(onChildAdded)
         entitiesFolder.ChildRemoved:Connect(onChildRemoved)
 end
-
+warn("Loaded👍aaaaaaaaaa")
 initializeDetection()
-
+warn("Loaded👍aaaaaaaaaa")
 
 
 
@@ -1219,24 +1170,11 @@ local function onChildAdded(child)
 
 
 
-local TextChatService = game:GetService("TextChatService")
-
-local function sendMessageToChannel(channelName, message)
-    local textChannelContainer = TextChatService:FindFirstChild("TextChannels")
-    local channel = textChannelContainer:FindFirstChild(channelName)
-    channel:SendAsync(message)
-end
-
-sendMessageToChannel("A200", "A200 is here!")
-
-
-
-
-        local message = Instance.new("Message")
-            message.Parent = workspace
-            message.Text = "A200 Hide."
-            wait(3)
-            message:Destroy()
+game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "a200",
+        Text = "hide.！！！",
+        Duration = 3
+    })
     end
 end
 
@@ -1246,23 +1184,11 @@ local function onChildRemoved(child)
         B:Play()
 
 
-local TextChatService = game:GetService("TextChatService")
-
-local function sendMessageToChannel(channelName, message)
-    local textChannelContainer = TextChatService:FindFirstChild("TextChannels")
-    local channel = textChannelContainer:FindFirstChild(channelName)
-    channel:SendAsync(message)
-end
-
-sendMessageToChannel("A200", "A200 is removed!")
-
-
-
-       local message = Instance.new("Message")
-            message.Parent = workspace
-            message.Text = "A200 removed."
-            wait(3)
-            message:Destroy() 
+game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "a200",
+        Text = "hide.！！！",
+        Duration = 3
+    })
             
     end
 end
@@ -1274,25 +1200,11 @@ local function initializeDetection()
             C:Play()
 
 
-local TextChatService = game:GetService("TextChatService")
-
-local function sendMessageToChannel(channelName, message)
-    local textChannelContainer = TextChatService:FindFirstChild("TextChannels")
-    local channel = textChannelContainer:FindFirstChild(channelName)
-    channel:SendAsync(message)
-end
-
-sendMessageToChannel("A200", "A200 is here!")
-
-
-
-
-            local message = Instance.new("Message")
-            message.Parent = workspace
-            message.Text = "A200 Hide."
-            wait(3)
-            message:Destroy()
-
+            game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "a200",
+        Text = "hide.！！！",
+        Duration = 3
+    })
         
         end
 
