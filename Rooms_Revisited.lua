@@ -1,3 +1,31 @@
+game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Syllable",
+        Text = "Script loading...",
+        Duration = 3
+    })
+
+local function createGODPart()
+    local part = Instance.new("Part")
+    part.Size = Vector3.new(100, 1, 100)
+    part.Name = "GOD"
+    part.Parent = game.Workspace
+    part.CFrame = CFrame.new(-234.13714599609375, 206.11968994140625, 28.109851837158203)
+    part.Anchored = true
+    print("GOD part created")
+end
+createGODPart()
+
+
+local Players = game:GetService("Players")
+local character = Players.LocalPlayer.Character
+local targetPosition = Vector3.new(-235.09442138671875, 228.0357666015625, 23.750064849853516)
+
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+        
+
+
+
+
 local Keybind = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
 local Frame = Instance.new("Frame")
@@ -268,6 +296,32 @@ Nzpd.TextSize = 14.000
 
 
 
+local SoundsFolder = Instance.new("Folder")
+SoundsFolder.Parent = game.Workspace
+SoundsFolder.Name = "SoundsFolder"
+local function getGitSoundId(GithubSoundPath: string, AssetName: string): Sound
+    local Url = GithubSoundPath
+
+    if not isfile(AssetName..".mp3") then 
+        writefile(AssetName..".mp3", game:HttpGet(Url)) 
+    end
+
+    local Sound = Instance.new("Sound")
+    Sound.SoundId = getcustomasset(AssetName..".mp3", true)
+    return Sound 
+end
+
+local C = getGitSoundId("https://github.com/LLGCAllIWantIsYou/green-fog/blob/main/Warning.MP3?raw=true", "WARN")
+        C.Name = "WARN"
+      C.Parent = SoundsFolder
+      C.Volume = 0.6
+      C.Pitch = 0.5
+
+      local B = getGitSoundId("https://github.com/LLGCAllIWantIsYou/green-fog/blob/main/mixkit-cowbell-sharp-hit-1743.mp3?raw=true", "NOTE")
+        B.Name = "NOTE"
+      B.Parent = SoundsFolder
+      B.Volume = 0.6
+      B.Pitch = 0.5
 
 
 
@@ -794,7 +848,8 @@ removeModel("LockerMimicNew")
 local Lighting = game:GetService("Lighting")
 local RunService = game:GetService("RunService")
 local brightLoop
-
+game:GetService("Lighting").Atmosphere:Destroy()
+game:GetService("Lighting").Brightness = 10
 function FullBrught()
 	local isEnabled = true
 	local originalSettings = {}
@@ -1036,13 +1091,10 @@ speaker.AncestryChanged:Connect(function()
 		cleanUp()
 	end
 end)
-
-
-warn("A60 WARN AND A200 WARN SOON")
 game:GetService("Players").LocalPlayer.PlayerGui.A902:Destroy()
 game:GetService("Players").LocalPlayer.PlayerGui.A90:Destroy()
 
-
+warn("Loaded👍")
 
 
 
@@ -1053,25 +1105,98 @@ local entitiesFolder = Workspace.Entities
 -- 检测目标出现
 local function onChildAdded(child)
     if child.Name == targetName then
-        print("你好我是")
+        C:Play()
+
+
+local TextChatService = game:GetService("TextChatService")
+
+local function sendMessageToChannel(channelName, message)
+    local textChannelContainer = TextChatService:FindFirstChild("TextChannels")
+    local channel = textChannelContainer:FindFirstChild(channelName)
+    channel:SendAsync(message)
+end
+
+sendMessageToChannel("A60", "A60 is here!")
+
+
+            local message = Instance.new("Message")
+            message.Parent = workspace
+            message.Text = "A60 Hide."
+            wait(3)
+            message:Destroy()
+
+
+
+
+
+
     end
 end
 
 -- 检测目标消失
 local function onChildRemoved(child)
     if child.Name == targetName then
-        print("再见我是")
+        
+
+B:Play()
+
+
+local TextChatService = game:GetService("TextChatService")
+
+local function sendMessageToChannel(channelName, message)
+    local textChannelContainer = TextChatService:FindFirstChild("TextChannels")
+    local channel = textChannelContainer:FindFirstChild(channelName)
+    channel:SendAsync(message)
+end
+
+sendMessageToChannel("A60", "A60 is removed!")
+
+
+
+
+
+            local message = Instance.new("Message")
+            message.Parent = workspace
+            message.Text = "A60 Removed."
+            wait(3)
+            message:Destroy()
     end
 end
 
--- 初始检查并设置事件监听
 local function initializeDetection()
-        -- 初始检查是否已存在
+        -- 检查是否已存在
         if entitiesFolder:FindFirstChild(targetName) then
-            print("你好我是")
+            C:Play()
+
+
+
+
+
+local TextChatService = game:GetService("TextChatService")
+
+local function sendMessageToChannel(channelName, message)
+    local textChannelContainer = TextChatService:FindFirstChild("TextChannels")
+    local channel = textChannelContainer:FindFirstChild(channelName)
+    channel:SendAsync(message)
+end
+
+sendMessageToChannel("A60", "A60 is here!")
+
+
+
+
+
+
+
+
+
+            local message = Instance.new("Message")
+            message.Parent = workspace
+            message.Text = "A60 Hide."
+            wait(3)
+            message:Destroy()
         end
 
-        -- 连接事件监听器
         entitiesFolder.ChildAdded:Connect(onChildAdded)
         entitiesFolder.ChildRemoved:Connect(onChildRemoved)
 end
@@ -1090,14 +1215,55 @@ local entitiesFolder = Workspace.Entities
 -- 检测目标出现
 local function onChildAdded(child)
     if child.Name == targetName then
-        print("你好我是")
+        C:Play()
+
+
+
+local TextChatService = game:GetService("TextChatService")
+
+local function sendMessageToChannel(channelName, message)
+    local textChannelContainer = TextChatService:FindFirstChild("TextChannels")
+    local channel = textChannelContainer:FindFirstChild(channelName)
+    channel:SendAsync(message)
+end
+
+sendMessageToChannel("A200", "A200 is here!")
+
+
+
+
+        local message = Instance.new("Message")
+            message.Parent = workspace
+            message.Text = "A200 Hide."
+            wait(3)
+            message:Destroy()
     end
 end
 
 -- 检测目标消失
 local function onChildRemoved(child)
     if child.Name == targetName then
-        print("再见我是")
+        B:Play()
+
+
+local TextChatService = game:GetService("TextChatService")
+
+local function sendMessageToChannel(channelName, message)
+    local textChannelContainer = TextChatService:FindFirstChild("TextChannels")
+    local channel = textChannelContainer:FindFirstChild(channelName)
+    channel:SendAsync(message)
+end
+
+sendMessageToChannel("A200", "A200 is removed!")
+
+
+
+       local message = Instance.new("Message")
+            message.Parent = workspace
+            message.Text = "A200 removed."
+            wait(3)
+            message:Destroy() 
+            
     end
 end
 
@@ -1105,7 +1271,29 @@ end
 local function initializeDetection()
         -- 初始检查是否已存在
         if entitiesFolder:FindFirstChild(targetName) then
-            print("你好我是")
+            C:Play()
+
+
+local TextChatService = game:GetService("TextChatService")
+
+local function sendMessageToChannel(channelName, message)
+    local textChannelContainer = TextChatService:FindFirstChild("TextChannels")
+    local channel = textChannelContainer:FindFirstChild(channelName)
+    channel:SendAsync(message)
+end
+
+sendMessageToChannel("A200", "A200 is here!")
+
+
+
+
+            local message = Instance.new("Message")
+            message.Parent = workspace
+            message.Text = "A200 Hide."
+            wait(3)
+            message:Destroy()
+
+        
         end
 
         -- 连接事件监听器
@@ -1114,12 +1302,13 @@ local function initializeDetection()
 end
 
 initializeDetection()
+--检测功能是否正常加载[👍]
+--setclipboard("👍")
+print("Loaded👍")
 
 
-
-
-
-
-
-
-print("Loaded")
+game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Syllable",
+        Text = "Script loaded.",
+        Duration = 3
+    })
