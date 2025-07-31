@@ -23,10 +23,6 @@ local character = Players.LocalPlayer.Character
 local targetPosition = Vector3.new(-235.09442138671875, 228.0357666015625, 23.750064849853516)
 
         local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-        
-
-game:GetService("Lighting").Atmosphere.Enabled = false
-
 
 local Keybind = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
