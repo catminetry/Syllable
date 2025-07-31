@@ -15,6 +15,8 @@ local function createGODPart()
 end
 createGODPart()
 
+game:GetService("Lighting").Atmosphere.Color = Color3.new(0,0,0)
+game:GetService("Lighting").Atmosphere.Decay = Color3.new(0,0,0)
 
 local Players = game:GetService("Players")
 local character = Players.LocalPlayer.Character
