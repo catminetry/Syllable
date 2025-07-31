@@ -23,7 +23,7 @@ local targetPosition = Vector3.new(-235.09442138671875, 228.0357666015625, 23.75
         local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
         
 
---game:GetService("Lighting").Atmosphere.Enabled = false
+game:GetService("Lighting").Atmosphere.Enabled = false
 
 
 local Keybind = Instance.new("ScreenGui")
@@ -274,7 +274,7 @@ Nzpd.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Nzpd.BorderSizePixel = 0
 Nzpd.Size = UDim2.new(0, 199, 0, 21)
 Nzpd.Font = Enum.Font.SourceSans
-Nzpd.Text = "More update soon..."
+Nzpd.Text = "[Beta]Auto rooms [N]"
 Nzpd.TextColor3 = Color3.fromRGB(255, 255, 255)
 Nzpd.TextSize = 14.000
 
@@ -1214,6 +1214,155 @@ local function initializeDetection()
 end
 
 initializeDetection()
+
+
+
+
+
+local player = game.Players.LocalPlayer
+-- 服务初始化
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+-- 本地玩家引用
+local player = Players.LocalPlayer
+local character = player.Character
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local humanoid = character:WaitForChild("Humanoid")
+local camera = workspace.CurrentCamera
+
+-- 功能开关
+local isActive = false
+local toggleKey = Enum.KeyCode.N
+
+-- 配置参数
+local a = workspace.GeneratedRooms
+local functionInterval = 0.03 -- 功能执行间隔（秒）
+local interactionInterval = 0.03 -- 互动间隔（秒）
+local lastFunctionTime = 0 -- 上次功能执行时间
+local lastInteractionTime = 0 -- 上次互动时间
+
+
+local a = workspace.GeneratedRooms
+-- 获取必要的服务和变量
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local currRoomValue = ReplicatedStorage.Values.CurrRoom.Value
+
+    local targetRoomNumber = currRoomValue - 1
+    local targetRoom1 = a:FindFirstChild("Room_" .. targetRoomNumber)
+    local Door_Model = targetRoom1.Door_Model
+
+
+
+local function toggleFunction()
+    isActive = not isActive
+    print("功能" .. (isActive and "已启用" or "已禁用"))
+end
+
+--aaaaaaaaaaaaaaaaaaa
+
+
+--===[[oooOOAOOooo]]===---
+-- 调整视角朝向目标
+local function lookAtTarget(targetPosition, targetRoom)
+    if humanoidRootPart and targetPosition and targetRoom then
+        -- 传送玩家到Door_Model.PlayerRoot
+        local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+
+local a = workspace.GeneratedRooms
+-- 获取必要的服务和变量
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local currRoomValue = ReplicatedStorage.Values.CurrRoom.Value
+
+if a and currRoomValue then
+    local targetRoomNumber = currRoomValue - 1
+    local targetRoom = a:FindFirstChild("Room_" .. targetRoomNumber)
+    
+    if targetRoom then
+        local newPosition = targetRoom.Door_Model.PlayerRoot.CFrame
+        humanoidRootPart.CFrame = newPosition
+    
+                    
+end
+end
+        
+        
+        -- 调整视角
+        local direction = (targetPosition - humanoidRootPart.Position).Unit
+        local lookCFrame = CFrame.new(humanoidRootPart.Position, humanoidRootPart.Position + direction)
+        humanoidRootPart.CFrame = lookCFrame
+        camera.CFrame = lookCFrame
+    end
+end
+
+-- 自动触发ProximityPrompt
+local function triggerProximityPrompt(prompt)
+    if prompt and prompt.Enabled and prompt.ActionText ~= "" then
+        prompt:InputHoldBegin()
+        task.wait(prompt.HoldDuration)
+        prompt:InputHoldEnd()
+    end
+end
+
+-- 主功能循环
+local function mainLoop(deltaTime)
+    if not isActive then return end
+    if not character or not humanoidRootPart then return end
+
+    -- 获取当前房间
+    local currRoomValue = ReplicatedStorage.Values.CurrRoom.Value
+    if not a or not currRoomValue then return end
+
+    -- 查找目标房间
+    local targetRoomNumber = currRoomValue - 1
+    local targetRoom = a:FindFirstChild("Room_" .. targetRoomNumber)
+    if not targetRoom then return end
+
+    -- 查找门把手和互动提示
+    local doorModel = targetRoom:FindFirstChild("Door_Model")
+    local door = doorModel and doorModel:FindFirstChild("Door")
+    local knob = door and door:FindFirstChild("Knob") and door.Knob:FindFirstChild("Knob")
+    local prompt = knob and knob:FindFirstChildOfClass("ProximityPrompt")
+
+    -- 执行功能逻辑（控制传送速度）
+    if knob and os.clock() - lastFunctionTime >= functionInterval then
+        lookAtTarget(knob.Position, targetRoom)
+        lastFunctionTime = os.clock()
+    end
+
+    -- 执行互动逻辑（控制互动速度）
+    if prompt and os.clock() - lastInteractionTime >= interactionInterval then
+        triggerProximityPrompt(prompt)
+        lastInteractionTime = os.clock()
+    end
+end
+
+-- 绑定快捷键
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed and input.KeyCode == toggleKey then
+        toggleFunction()
+    end
+end)
+
+-- 开始循环
+RunService.Heartbeat:Connect(mainLoop)
+
+-- 初始提示
+print("按N键启用/禁用自动门互动功能")
+
+
+
+
+
+
+
+
+
 --检测功能是否正常加载[👍]
 --setclipboard("👍")
 print("Loaded👍")
