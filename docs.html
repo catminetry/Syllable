@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>Syntax • Docs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="bg"></div>
+
+<div class="glass docs">
+  <header>
+    <h1><span class="accent">Syntax</span> Docs</h1>
+    <p class="sub">Roblox Scripting • Official Documentation</p>
+  </header>
+
+  <nav class="toc">
+    <a href="#getting-started">Getting Started</a>
+    <a href="#installation">Installation</a>
+    <a href="#api">API Reference</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+
+  <section id="getting-started">
+    <h2>🚀 Getting Started</h2>
+    <p>
+      Syntax is a high-performance Roblox scripting framework.
+      It focuses on clean APIs, safe execution, and modern developer experience.
+    </p>
+  </section>
+
+  <section id="installation">
+    <h2>📦 Installation</h2>
+    <p>Paste this into your executor:</p>
+    <pre class="code"><code>loadstring(game:HttpGet("https://syntax.cc/loader.lua"))()</code></pre>
+  </section>
+
+  <section id="api">
+    <h2>📘 API Reference</h2>
+
+    <h3>load()</h3>
+    <p>Load the main Syntax environment.</p>
+    <pre class="code"><code>local Syntax = load()
+Syntax:Init()</code></pre>
+
+    <h3>setConfig(tbl)</h3>
+    <p>Configure runtime options.</p>
+    <pre class="code"><code>Syntax:setConfig({
+  autoUpdate = true,
+  debug = false
+})</code></pre>
+  </section>
+
+  <section id="faq">
+    <h2>❓ FAQ</h2>
+    <p><strong>Q: Does Syntax support all executors?</strong></p>
+    <p>A: Yes. Synapse X, Fluxus, KRNL, Wave, and most others are supported.</p>
+
+    <p><strong>Q: Is it safe?</strong></p>
+    <p>A: Syntax runs fully client-side and does not collect any data.</p>
+  </section>
+
+  <footer>
+    <p>© 2026 Syntax.cc — Not affiliated with Roblox Corporation.</p>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
