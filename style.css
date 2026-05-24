@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: #e5e7eb;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+#bg {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(56,189,248,.25), transparent 60%),
+    radial-gradient(circle at 80% 70%, rgba(129,140,248,.25), transparent 60%),
+    #020617;
+  z-index: -1;
+}
+
+.glass {
+  width: min(920px, 92vw);
+  padding: 52px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.15);
+  text-align: center;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-weight: 800;
+  margin: 0;
+}
+
+.accent {
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sub {
+  margin: 14px 0 36px;
+  opacity: 0.75;
+  font-size: 1.1rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 14px 30px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #020617;
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  transition: transform 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.btn.outline {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #e5e7eb;
+}
+
+.code {
+  margin-top: 40px;
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(0,0,0,0.55);
+  text-align: left;
+  overflow-x: auto;
+  font-size: 0.95rem;
+}
